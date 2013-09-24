@@ -6,7 +6,6 @@ domain:     'domain.name'
 verbose:    false
 operatingsystem: ubuntu
 scenario: 2_role
-
 # puppet config
 application:
 - openstack
