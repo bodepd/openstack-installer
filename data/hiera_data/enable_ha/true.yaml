@@ -21,7 +21,11 @@ coe::base::package_repo: cisco_repo
 
 # this will need to overridden per node based on if it is active of passive
 galera::server::galera_master_ip: false
-galera::master_ip: false
+# this should be overridden per node and can be
+# master or back-up
+openstack-ha::load-balancer::controller_state: MASTER
+openstack-ha::load-balancer::swift_proxy_state: MASTER
+
 
 gelera::server::galera_cluster_name: controller_cluster
 galera::server::wsrep_sst_username: wsrep_user
@@ -37,5 +41,6 @@ openstack::auth_file::admin_tenant: admin
 allowed_hosts: "%"
 localhost: 127.0.0.1
 
-
 nova::api::enabled_apis: 'ec2,osapi_compute'
+
+nova::compute::libvirt::libvirt_type: kvm

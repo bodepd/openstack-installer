@@ -40,6 +40,7 @@ bind_address:
   - galera::monitor::monitor_hostname
   - quantum::bind_host
   - neutron::bind_host
+  - openstack::swift::proxy::swift_proxy_net_ip
 "mysql://cinder:%{cinder_db_password}@%{controller_internal_address}/cinder?charset=utf8":
   - cinder::sql_connection
 "mysql://glance:%{glance_db_password}@%{controller_internal_address}/glance":
@@ -57,3 +58,27 @@ bind_address:
 "http://%{controller_public_address}:5000/v2.0/":
   - glance::backend::swift::swift_store_auth_address
   - glance::api::auth_url
+controller_internal_address:
+  - openstack-ha::load-balancer::controller_virtual_ip
+swift_admin_address:
+  - swift::keystone::auth::admin_address
+swift_internal_address:
+  - swift::keystone::auth::internal_address
+  - openstack-ha::load-balancer::swift_proxy_virtual_ip
+swift_public_address:
+  - swift::keystone::auth::public_address
+#  - openstack::swift::proxy::swift_proxy_net_ip 
+swift_storage_interface:
+  - coe::network::interface::interface_name
+swift_local_net_ip:
+  - openstack::swift::proxy::swift_local_net_ip
+  - openstack::swift::storage-node::swift_local_net_ip
+  - coe::network::interface::ipaddress
+  - openstack::swift::proxy::memcached_listen_ip
+swift_storage_netmask:
+  - coe::network::interface::netmask
+private_interface:
+  - openstack-ha::load-balancer::keepalived_interface
+controller_names:
+  - rabbitmq::server::cluster_disk_nodes
+  - openstack-ha::load-balancer::controller_names

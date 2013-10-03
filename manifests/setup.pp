@@ -51,6 +51,7 @@ file { "${settings::confdir}/hiera.yaml":
   - data_mapper
 :hierarchy:
   - "hostname/%{hostname}"
+  - "client/%{clientcert}"
   - user
   - jenkins
   - user.%{scenario}

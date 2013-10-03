@@ -16,6 +16,10 @@ roles:
       - controller
       - provider_network_controller
       - test_file
+  load_balancer:
+    classes:
+      - coe::base
+      - openstack-ha::load-balancer
   compute:
     classes:
       - coe::base
@@ -26,8 +30,10 @@ roles:
   swift_proxy:
     classes:
       - coe::base
+      - coe::network::interface
       - openstack::swift::proxy
   swift_storage:
     classes:
       - coe::base
+      - coe::network::interface
       - openstack::swift::storage-node
