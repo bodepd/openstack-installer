@@ -29,11 +29,14 @@ coe::base::package_repo: cloud_archive
 # used for testing
 openstack::test_file::image_type: cirros
 openstack::client::ceilometer: false
+openstack::test_file::sleep_time: 60
 
 cinder::volume::iscsi::iscsi_ip_address: 0.0.0.0
 # swift info
 glance::backend::swift::swift_store_user: services:swift
 glance::backend::swift::swift_store_create_container_on_put: true
+
+mysql::config::max_connections: 10000
 
 
 openstack::swift::storage-node::storage_type: loopback
