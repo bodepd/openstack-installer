@@ -1,0 +1,99 @@
+nodes:
+  build-server:
+    networks:
+      ci:
+        - 'cobbler_node_ip'
+        - 'build_server_ip'
+    flavor: 'm1.medium'
+    image:  'precise-x86_64'
+    fragments:
+      - 'bash-top'
+      - 'fqdn-fix'
+      - 'pw-mirror-network'
+      - 'apt-packages'
+      - 'cloud-init-log'
+      - 'puppet-modules'
+      - 'hiera-config'
+      - 'puppet-master-fact'
+      - 'puppet-setup'
+      - 'puppet-site'
+      - 'build-sig-stack'
+  load-balancer-1:
+    networks:
+      ci:
+      internal:
+    flavor: 'm1.medium'
+    image:  'precise-x86_64'
+    fragments:
+      - 'bash-top'
+      - 'fqdn-fix'
+      - 'pw-mirror-network'
+      - 'apt-packages'
+      - 'cloud-init-log'
+      - 'puppet-modules'
+      - 'hiera-config'
+      - 'puppet-setup'
+      - 'stack-wait-build'
+      - 'puppet-agent'
+      - 'load-balancer-sig'
+  load-balancer-2:
+    flavor: 'm1.medium'
+    image:  'precise-x86_64'
+      internal:
+    fragments:
+      - 'bash-top'
+      - 'fqdn-fix'
+      - 'pw-mirror-network'
+      - 'apt-packages'
+      - 'cloud-init-log'
+      - 'puppet-modules'
+      - 'hiera-config'
+      - 'puppet-setup'
+      - 'stack-wait-build'
+      - 'puppet-agent'
+      - 'load-balancer-sig'
+#  control-server:
+#    networks:
+#      ci:
+#        - 'controller_internal_address'
+#        - 'controller_admin_address'
+#        - 'controller_public_address'
+#      internal:
+#      external:
+#    flavor: 'm1.medium'
+#    image:  'precise-x86_64'
+#    fragments:
+#      - 'bash-top'
+#      - 'fqdn-fix'
+#      - 'pw-mirror-network'
+#      - 'apt-packages'
+#      - 'cloud-init-log'
+#      - 'puppet-modules'
+#      - 'hiera-config'
+#      - 'puppet-setup'
+#      - 'stack-wait-build'
+#      - 'puppet-agent'
+#      - 'control-sig-compute'
+#  compute-server02:
+#    networks:
+#      ci:
+#      internal:
+#      external:
+#    flavor:       'm1.medium'
+#    image:        'precise-x86_64'
+#    memory:       2512
+#    ip_number:    21
+#    vagrant_name: compute_basevm
+#    fragments:
+#      - 'bash-top'
+#      - 'fqdn-fix'
+#      - 'pw-mirror-network'
+#      - 'apt-packages'
+#      - 'cloud-init-log'
+#      - 'puppet-modules'
+#      - 'hiera-config'
+#      - 'puppet-setup'
+#      - 'stack-wait-build'
+#      - 'puppet-agent'
+#      - 'compute-wait-control'
+#      - 'puppet-agent'
