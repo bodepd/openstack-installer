@@ -62,10 +62,9 @@ base_url = "#{git_protocol}://github.com"
 # this following modules are still undergoing their initial development
 # and have not yet been ported to CiscoSystems.
 
-mod 'bodepd/hiera_data_mapper',
-  :git => 'https://github.com/bodepd/hiera_data_mapper'
 mod 'bodepd/scenario_node_terminus',
-  :git => 'https://github.com/bodepd/scenario_node_terminus'
+  :git => 'https://github.com/bodepd/scenario_node_terminus',
+  :ref => 'origin/precompile_hiera'
 mod 'CiscoSystems/coi',
   :git => "#{base_url}/CiscoSystems/puppet-COI",
   :ref => 'master'
