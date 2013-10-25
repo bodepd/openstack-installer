@@ -63,7 +63,8 @@ base_url = "#{git_protocol}://github.com"
 # and have not yet been ported to CiscoSystems.
 
 mod 'bodepd/scenario_node_terminus',
-  :git => 'https://github.com/bodepd/scenario_node_terminus'
+  :git => 'https://github.com/bodepd/scenario_node_terminus',
+  :ref => 'origin/interactive_installer'
 mod 'CiscoSystems/coi',
   :git => "#{base_url}/CiscoSystems/puppet-COI",
   :ref => 'master'
